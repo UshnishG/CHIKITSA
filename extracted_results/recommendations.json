@@ -1,0 +1,84 @@
+{
+  "diagnoses": [
+    "Type 2 Diabetes Mellitus",
+    "Vitamin B12 Deficiency",
+    "Vitamin D Deficiency",
+    "Hyperhomocysteinemia (likely due to Vitamin B12 deficiency)",
+    "Allergic/Inflammatory Condition"
+  ],
+  "recommendations": [
+    {
+      "condition": "Type 2 Diabetes Mellitus",
+      "medicine": "Metformin",
+      "dosage": "Usually starts at 500mg twice daily, may increase to 1000mg twice daily based on response and tolerance.",
+      "side_effects": [
+        "Digestive issues",
+        "Vitamin B12 deficiency"
+      ],
+      "alternatives": [
+        "Sulfonylureas",
+        "DPP-4 inhibitors"
+      ]
+    },
+    {
+      "condition": "Vitamin B12 Deficiency",
+      "medicine": "Cyanocobalamin",
+      "dosage": "Intramuscular injection of 1000mcg once a month or oral supplement of 1000mcg daily.",
+      "side_effects": [
+        "Injection site pain",
+        "Mild diarrhea"
+      ],
+      "alternatives": [
+        "Hydroxocobalamin"
+      ]
+    },
+    {
+      "condition": "Vitamin D Deficiency",
+      "medicine": "Cholecalciferol",
+      "dosage": "Oral supplement of 50,000IU once a week for 4-6 weeks, then 1000-2000IU daily as maintenance.",
+      "side_effects": "Rare at normal doses"
+    },
+    {
+      "condition": "Hyperhomocysteinemia",
+      "medicine": "Folate and B6 supplements",
+      "dosage": "2.5mg of folate and 25mg of B6 daily.",
+      "side_effects": "Rare at normal doses"
+    },
+    {
+      "condition": "Allergic/Inflammatory Condition",
+      "medicine": "Cetirizine",
+      "dosage": "10mg once daily or 5mg twice daily.",
+      "side_effects": [
+        "Drowsiness",
+        "Dry mouth"
+      ],
+      "alternatives": [
+        "Loratadine",
+        "Fexofenadine"
+      ]
+    }
+  ],
+  "side_effects": [
+    "Digestive issues",
+    "Vitamin B12 deficiency",
+    "Injection site pain",
+    "Mild diarrhea",
+    "Drowsiness",
+    "Dry mouth"
+  ],
+  "alternatives": [
+    "Sulfonylureas",
+    "DPP-4 inhibitors",
+    "Hydroxocobalamin",
+    "Loratadine",
+    "Fexofenadine"
+  ],
+  "lifestyle_recommendations": [
+    "Balanced diet with adequate amounts of whole grains, fruits, vegetables, lean proteins, and low-fat dairy products.",
+    "Regular exercise (aim for at least 30 minutes most days of the week).",
+    "Avoid foods high in saturated fats and added sugars.",
+    "Maintain a healthy weight.",
+    "Limit alcohol consumption.",
+    "Avoid smoking."
+  ]
+}

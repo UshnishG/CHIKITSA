@@ -1,0 +1,55 @@
+{
+  "patient_info": {},
+  "test_results": {},
+  "abnormal_values": [
+    {
+      "test_name": "HbA1c",
+      "value": "7.10",
+      "unit": "%",
+      "reference_range": "<5.7%",
+      "severity": "high",
+      "condition": "diabetes"
+    },
+    {
+      "test_name": "Vitamin B12",
+      "value": "<148",
+      "unit": "pg/mL",
+      "reference_range": "211-911 pg/mL",
+      "severity": "low",
+      "condition": "vitamin B12 deficiency"
+    },
+    {
+      "test_name": "Vitamin D",
+      "value": "8.98",
+      "unit": "ng/mL",
+      "reference_range": "30-100 ng/mL",
+      "severity": "low",
+      "condition": "vitamin D deficiency"
+    },
+    {
+      "test_name": "Homocysteine",
+      "value": "23.86",
+      "unit": "\u00b5mol/L",
+      "reference_range": "5.46-16.20 \u00b5mol/L",
+      "severity": "high",
+      "condition": "vitamin deficiency related hyperhomocysteinemia"
+    },
+    {
+      "test_name": "Fasting Blood Sugar",
+      "value": "141",
+      "unit": "mg/dL",
+      "reference_range": "70-100 mg/dL",
+      "severity": "high",
+      "condition": "diabetes"
+    },
+    {
+      "test_name": "IgE",
+      "value": "492.3",
+      "unit": "IU/mL",
+      "reference_range": "<158 IU/mL",
+      "severity": "high",
+      "condition": "allergic conditions"
+    }
+  ],
+  "raw_extraction": "{\n      \"patient_info\": {\n         \"age\": \"41\",\n         \"gender\": \"Male\",\n         \"date_of_birth\": \"01-Feb-1982\"\n      },\n      \"test_results\": {\n         \"Physical & Chemical (Dip strip) examination\": {\n            \"value\": \"Pale Yellow\",\n            \"unit\": \"\",\n            \"reference_range\": \"Not specified\"\n         },\n         \"Urine Glucose\": {\n            \"value\": \"Present (+)\",\n            \"unit\": \"\",\n            \"reference_range\": \"Absent\"\n         },\n         \"Urine Protein\": {\n            \"value\": \"Absent\",\n            \"unit\": \"\",\n            \"reference_range\": \"0 - 2\"\n         },\n         \"Nitrite\": {\n            \"value\": \"Absent\",\n            \"unit\": \"\",\n            \"reference_range\": \"Present (+)\"\n         },\n         \"analysis_comments\": {\n            \"F Concentration\": {\n               \"value\": \"0.3 %\",\n               \"unit\": \"\",\n               \"reference_range\": \"Not specified\"\n            },\n            \"A2 Concentration\": {\n               \"value\": \"2.8 %\",\n               \"unit\": \"\",\n               \"reference_range\": \"Not specified\"\n            }\n         }\n      },\n      \"abnormal_values\": [\n         {\n            \"test_name\": \"Urine Glucose\",\n            \"value\": \"Present (+)\",\n            \"unit\": \"\",\n            \"reference_range\": \"Absent\",\n            \"severity\": \"high\"\n         },\n         {\n            \"test_name\": \"Nitrite\",\n            \"value\": \"Absent\",\n            \"unit\": \"\",\n            \"reference_range\": \"Present (+)\",\n            \"severity\": \"low\"\n         },\n         {\n            \"test_name\": \"F Concentration\",\n            \"value\": \"0.3 %\",\n            \"unit\": \"\",\n            \"reference_range\": \"Not specified\",\n            \"severity\": \"low\" // This value could indicate diabetes or other conditions affecting blood sugar levels, but without more context, it's hard to categorize the severity.\n         },\n         {\n            \"test_name\": \"A2 Concentration\",\n            \"value\": \"2.8 %\",\n            \"unit\": \"\",\n            \"reference_range\": \"Not specified\",\n            \"severity\": \"low\" // This value could indicate hereditary hemolytic anemia, but without more context, it's hard to categorize the severity.\n         }\n      ]\n   }"
+}
