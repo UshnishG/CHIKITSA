@@ -2,7 +2,7 @@
 
 **Customized Healthcare Intelligence for Knowledge-driven Intervention and Therapy through Smart Algorithms**
 
-<img src= 'Readme_pics/Logo.jpg' height=400 width=850>
+<img src= 'Readme_pics/Logo.jpg' height=350 width=850>
 
 ## Table of Contents
 
