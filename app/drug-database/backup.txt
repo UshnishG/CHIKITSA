@@ -1,0 +1,325 @@
+"use client"
+
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Search, Pill, AlertCircle, Info, Clock, ChevronRight, Filter, ArrowUpDown } from "lucide-react"
+import { motion } from "framer-motion"
+import { FadeIn, SlideIn } from "@/components/animations"
+
+// Sample drug data
+const drugs = [
+  {
+    id: 1,
+    name: "Metformin",
+    category: "Antidiabetic",
+    description: "Used to treat type 2 diabetes by improving blood sugar control.",
+    dosageForm: "Tablet",
+    standardDosage: "500-2000mg daily",
+    interactions: ["Alcohol", "Iodinated contrast media", "Certain antibiotics"],
+    sideEffects: ["Nausea", "Diarrhea", "Abdominal discomfort", "Metallic taste"],
+    precautions: ["Renal impairment", "Hepatic disease", "Heart failure"],
+    aiOptimized: true,
+  },
+  {
+    id: 2,
+    name: "Lisinopril",
+    category: "ACE Inhibitor",
+    description: "Used to treat high blood pressure and heart failure.",
+    dosageForm: "Tablet",
+    standardDosage: "10-40mg daily",
+    interactions: ["Potassium supplements", "NSAIDs", "Lithium"],
+    sideEffects: ["Dry cough", "Dizziness", "Headache", "Fatigue"],
+    precautions: ["Pregnancy", "Renal artery stenosis", "Angioedema history"],
+    aiOptimized: true,
+  },
+  {
+    id: 3,
+    name: "Atorvastatin",
+    category: "Statin",
+    description: "Used to lower cholesterol and reduce the risk of heart disease.",
+    dosageForm: "Tablet",
+    standardDosage: "10-80mg daily",
+    interactions: ["Grapefruit juice", "Certain antibiotics", "Antifungals"],
+    sideEffects: ["Muscle pain", "Liver enzyme elevation", "Digestive issues"],
+    precautions: ["Liver disease", "Pregnancy", "Heavy alcohol use"],
+    aiOptimized: true,
+  },
+  {
+    id: 4,
+    name: "Albuterol",
+    category: "Bronchodilator",
+    description: "Used to treat asthma and COPD by relaxing airway muscles.",
+    dosageForm: "Inhaler",
+    standardDosage: "1-2 puffs every 4-6 hours as needed",
+    interactions: ["Beta-blockers", "Diuretics", "Other stimulants"],
+    sideEffects: ["Tremor", "Nervousness", "Headache", "Rapid heartbeat"],
+    precautions: ["Cardiovascular disease", "Hypertension", "Diabetes"],
+    aiOptimized: false,
+  },
+  {
+    id: 5,
+    name: "Levothyroxine",
+    category: "Thyroid Hormone",
+    description: "Used to treat hypothyroidism and thyroid hormone deficiency.",
+    dosageForm: "Tablet",
+    standardDosage: "25-200mcg daily",
+    interactions: ["Calcium supplements", "Iron supplements", "Antacids"],
+    sideEffects: ["Weight loss", "Nervousness", "Insomnia", "Tremors"],
+    precautions: ["Cardiovascular disease", "Adrenal insufficiency", "Diabetes"],
+    aiOptimized: true,
+  },
+]
+
+export default function DrugDatabasePage() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedDrug, setSelectedDrug] = useState(null)
+  const [activeTab, setActiveTab] = useState("all")
+
+  const filteredDrugs = drugs
+    .filter(
+      (drug) =>
+        drug.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        drug.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        drug.description.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .filter((drug) => activeTab === "all" || (activeTab === "ai-optimized" && drug.aiOptimized))
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <section className="w-full py-8 bg-secondary/30 dark:bg-gray-900">
+        <div className="container px-4 md:px-6">
+          <FadeIn>
+            <div className="flex flex-col space-y-4">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl text-primary">Drug Database</h1>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Comprehensive information on medications and AI-optimized dosage recommendations
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="w-full py-6 bg-white dark:bg-gray-950">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-6 lg:grid-cols-12">
+            <div className="lg:col-span-4 space-y-4">
+              <div className="flex flex-col gap-4">
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="Search medications..."
+                    className="pl-8 rounded-full"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+
+                <Tabs defaultValue="all" onValueChange={setActiveTab}>
+                  <TabsList className="grid w-full grid-cols-2 rounded-full p-1 bg-secondary/50">
+                    <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-white">
+                      All Medications
+                    </TabsTrigger>
+                    <TabsTrigger value="ai-optimized" className="rounded-full data-[state=active]:bg-white">
+                      AI Optimized
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+
+                <div className="flex justify-between items-center">
+                  <p className="text-sm text-muted-foreground">{filteredDrugs.length} medications found</p>
+                  <Button variant="ghost" size="sm" className="gap-1 rounded-full">
+                    <Filter className="h-4 w-4" />
+                    Filter
+                  </Button>
+                </div>
+              </div>
+
+              <Card className="ios-card border-none overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="max-h-[600px] overflow-y-auto">
+                    {filteredDrugs.length > 0 ? (
+                      <ul className="divide-y">
+                        {filteredDrugs.map((drug) => (
+                          <motion.li
+                            key={drug.id}
+                            whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }}
+                            className="p-3 cursor-pointer"
+                            onClick={() => setSelectedDrug(drug)}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                                  <Pill className="h-5 w-5 text-primary" />
+                                </div>
+                                <div>
+                                  <h4 className="font-medium">{drug.name}</h4>
+                                  <p className="text-sm text-muted-foreground">{drug.category}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                {drug.aiOptimized && (
+                                  <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                                    AI Optimized
+                                  </Badge>
+                                )}
+                                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                              </div>
+                            </div>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="p-8 text-center">
+                        <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <h3 className="font-medium">No medications found</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Try adjusting your search or filters</p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="lg:col-span-8">
+              {selectedDrug ? (
+                <SlideIn>
+                  <Card className="ios-card border-none">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                            <Pill className="h-6 w-6 text-primary" />
+                          </div>
+                          <div>
+                            <CardTitle>{selectedDrug.name}</CardTitle>
+                            <CardDescription>{selectedDrug.category}</CardDescription>
+                          </div>
+                        </div>
+                        {selectedDrug.aiOptimized && (
+                          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                            AI Optimized
+                          </Badge>
+                        )}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div>
+                        <h3 className="text-lg font-medium mb-2">Overview</h3>
+                        <p className="text-muted-foreground">{selectedDrug.description}</p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="rounded-lg border p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Info className="h-5 w-5 text-primary" />
+                            <h4 className="font-medium">Dosage Information</h4>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-sm text-muted-foreground">Form:</span>
+                              <span className="text-sm font-medium">{selectedDrug.dosageForm}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm text-muted-foreground">Standard Dosage:</span>
+                              <span className="text-sm font-medium">{selectedDrug.standardDosage}</span>
+                            </div>
+                            {selectedDrug.aiOptimized && (
+                              <div className="mt-4 p-2 rounded-md bg-primary/5 border border-primary/10">
+                                <div className="flex items-center gap-2">
+                                  <ArrowUpDown className="h-4 w-4 text-primary" />
+                                  <span className="text-sm font-medium text-primary">
+                                    AI Dosage Optimization Available
+                                  </span>
+                                </div>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Our AI system can suggest personalized dosage adjustments based on your specific
+                                  health data and response patterns.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <AlertCircle className="h-5 w-5 text-amber-500" />
+                            <h4 className="font-medium">Precautions</h4>
+                          </div>
+                          <ul className="space-y-1 list-disc pl-5">
+                            {selectedDrug.precautions.map((precaution, index) => (
+                              <li key={index} className="text-sm text-muted-foreground">
+                                {precaution}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="rounded-lg border p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <AlertCircle className="h-5 w-5 text-primary" />
+                            <h4 className="font-medium">Side Effects</h4>
+                          </div>
+                          <ul className="space-y-1 list-disc pl-5">
+                            {selectedDrug.sideEffects.map((effect, index) => (
+                              <li key={index} className="text-sm text-muted-foreground">
+                                {effect}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="rounded-lg border p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Clock className="h-5 w-5 text-primary" />
+                            <h4 className="font-medium">Interactions</h4>
+                          </div>
+                          <ul className="space-y-1 list-disc pl-5">
+                            {selectedDrug.interactions.map((interaction, index) => (
+                              <li key={index} className="text-sm text-muted-foreground">
+                                {interaction}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end gap-2">
+                        <Button variant="outline" className="rounded-full">
+                          Add to Favorites
+                        </Button>
+                        <Button className="rounded-full">Request Dosage Optimization</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </SlideIn>
+              ) : (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary mx-auto mb-4">
+                      <Pill className="h-10 w-10 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-medium">Select a Medication</h3>
+                    <p className="text-muted-foreground mt-2 max-w-md">
+                      Choose a medication from the list to view detailed information and AI-optimized dosage
+                      recommendations.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
