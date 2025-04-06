@@ -2,7 +2,7 @@
 
 **Customized Healthcare Intelligence for Knowledge-driven Intervention and Therapy through Smart Algorithms**
 
-![CHIKITSA Banner](https://i.ibb.co/0h9S4K3/chikitsa-banner.png)
+<img src= 'Readme_pics/Logo.jpg' height=400 width=900>
 
 ## Table of Contents
 
